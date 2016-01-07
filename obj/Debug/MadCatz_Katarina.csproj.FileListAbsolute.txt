@@ -2,3 +2,4 @@ C:\Users\User-Kim\Desktop\MadCatz_Katarina\MadCatz_Katarina\bin\Debug\MadCatz_Ka
 C:\Users\User-Kim\Documents\GitHub\MadCatz_Katarina\MadCatz_Katarina\bin\Debug\MadCatz_Katarina.exe.config
 C:\Users\User-Kim\Documents\GitHub\EloBuddy\MadCatz_Katarina\MadCatz_Katarina\bin\Debug\MadCatz_Katarina.exe.config
 C:\Users\User-Kim\Documents\GitHub\EloBuddy\MadCatz_Katarina\bin\Debug\MadCatz_Katarina.exe.config
+C:\Users\User-Kim\Documents\GitHub\EloBuddy\bin\Debug\MadCatz_Katarina.exe.config
