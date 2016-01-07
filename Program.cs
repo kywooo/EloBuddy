@@ -93,7 +93,9 @@ namespace MadCatz_Katarina
                 case Orbwalker.ActiveModes.Harass:
                     Harass(HarassMenu["Q"].Cast<CheckBox>().CurrentValue, HarassMenu["W"].Cast<CheckBox>().CurrentValue);
                     break;
-                //case Orbwalker.ActiveModes.LaneClear:
+                case Orbwalker.ActiveModes.LaneClear:
+                    LaneClear(LaneClearMenu["Q"].Cast<CheckBox>().CurrentValue, LaneClearMenu["W"].Cast<CheckBox>().CurrentValue);
+                    break;
                     
             }
         }
