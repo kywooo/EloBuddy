@@ -78,13 +78,15 @@ namespace MadCatz_Katarina
 
             Misc = menu.AddSubMenu("Misc", "Misc");
             Misc.AddGroupLabel("Misc");
-            Misc.Add("Q", new CheckBox("KillSteal Q", true));
-            Misc.Add("E", new CheckBox("KillSteal E", true));
-            Misc.Add("AutoKill", new CheckBox("Enable E for Kill(minion ally, Target)", true));
+            Misc.Add("Q", new CheckBox("Auto Q", true));
+            Misc.Add("W", new CheckBox("Auto W", true));
+            Misc.AddLabel("Auto Q,W");
             Misc.AddSeparator();
 
 
             Game.OnTick += Update;
+
+            
 
             Chat.Print("MadCatz" + ChampName + "MadCatz_Load");
             Chat.Print("Korean Developer Good Luck!");
@@ -158,13 +160,8 @@ namespace MadCatz_Katarina
 
         static void LaneClear(bool UseQ, bool UseW)
         {
+           
         }
-
-        static void AutoKill()
-        {
-
-        }
-
         public float ComboDamage(AIHeroClient enemy)
         {
             var Damage = 0d;
@@ -195,6 +192,25 @@ namespace MadCatz_Katarina
             if (_target != null)
             {
                 Circle.Draw(Color.Red, 150, _target.Position);
+            }
+        }
+
+        static void AutoHarass()
+        {
+            var _target = TargetSelector.GetTarget(Q.Range, EloBuddy.DamageType.Magical);
+
+            if(_target == null || !_target.IsValidTarget())
+            {
+                return;
+            }
+
+            if(Q.IsReady() && Misc["Auto Q"].Cast<CheckBox>().CurrentValue && _target.IsValidTarget(Q.Range))
+            {
+                Q.Cast(_target);
+            }
+            if(W.IsReady() && Misc["Auto W"].Cast<CheckBox>().CurrentValue && _target.IsValidTarget(W.Range))
+            {
+                W.Cast();
             }
         }
     }
