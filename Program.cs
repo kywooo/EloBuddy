@@ -161,7 +161,7 @@ namespace MadCatz_Katarina
 
         }
 
-        static float ComboDamage(AIHeroClient enemy)
+        public float ComboDamage(AIHeroClient enemy)
         {
             var Damage = 0d;
 
