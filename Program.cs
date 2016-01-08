@@ -136,9 +136,14 @@ namespace MadCatz_Katarina
                 _target.IsValidTarget(R.Range))
             {
                 Orbwalker.DisableMovement = false;
-                Orbwalker.DisableAttacking = true;
+                Orbwalker.DisableAttacking = false;
 
                 R.Cast();
+            }
+            else
+            {
+                Orbwalker.DisableMovement = true;
+                Orbwalker.DisableAttacking = true;
             }
         }
 
