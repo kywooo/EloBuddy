@@ -140,11 +140,6 @@ namespace MadCatz_Katarina
 
                 R.Cast();
             }
-            else
-            {
-                Orbwalker.DisableMovement = true;
-                Orbwalker.DisableAttacking = true;
-            }
         }
 
         static void Harass(bool UseQ, bool UseW)
