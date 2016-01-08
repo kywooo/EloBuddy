@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Events;
@@ -19,7 +21,9 @@ namespace MadCatz_Katarina
         static Spell.Targeted E;
         static Spell.Active R;
 
-        public static Menu menu, ComboMenu, HarassMenu, LaneClearMenu, Misc;
+        public static Menu menu, ComboMenu, HarassMenu, LaneClearMenu, Misc, DrawingMenu;
+
+        public static AIHeroClient _target;
 
         public static AIHeroClient Player
         {
@@ -184,6 +188,14 @@ namespace MadCatz_Katarina
         public double MDmg(Obj_AI_Base _target)
         {
             return _target.HasBuff("Katarinaqmark") ? Player.GetSpellDamage(_target, SpellSlot.Q) : 0;
+        }
+
+        static void Drawing_Draw(EventArgs args)
+        {
+            if (_target != null)
+            {
+                Circle.Draw(Color.Red, 150, _target.Position);
+            }
         }
     }
 }
