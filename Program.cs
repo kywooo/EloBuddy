@@ -24,6 +24,7 @@ namespace MadCatz_Katarina
         public static Menu menu, ComboMenu, HarassMenu, LaneClearMenu, Misc, DrawingMenu;
 
         public static AIHeroClient _target;
+        static bool InUlt = false;
 
         public static AIHeroClient Player
         {
@@ -135,10 +136,12 @@ namespace MadCatz_Katarina
             if(R.IsReady() && !E.IsReady() && !Q.IsReady() && !W.IsReady() && 
                 _target.IsValidTarget(R.Range))
             {
-                Orbwalker.DisableMovement = false;
-                Orbwalker.DisableAttacking = false;
+                Orbwalker.DisableMovement = true;
+                Orbwalker.DisableAttacking = true;
 
                 R.Cast();
+
+                InUlt = true;
             }
         }
 
