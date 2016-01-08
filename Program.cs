@@ -86,8 +86,6 @@ namespace MadCatz_Katarina
 
             Game.OnTick += Update;
 
-            
-
             Chat.Print("MadCatz" + ChampName + "MadCatz_Load");
             Chat.Print("Korean Developer Good Luck!");
         }
@@ -137,8 +135,8 @@ namespace MadCatz_Katarina
             if(R.IsReady() && !E.IsReady() && !Q.IsReady() && !W.IsReady() && 
                 _target.IsValidTarget(R.Range))
             {
-                Orbwalker.DisableMovement = false;
-                Orbwalker.DisableAttacking = false;
+                Orbwalker.DisableMovement = true;
+                Orbwalker.DisableAttacking = true;
 
                 R.Cast();
             }
