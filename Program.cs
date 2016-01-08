@@ -135,7 +135,7 @@ namespace MadCatz_Katarina
             if(R.IsReady() && !E.IsReady() && !Q.IsReady() && !W.IsReady() && 
                 _target.IsValidTarget(R.Range))
             {
-                Orbwalker.DisableMovement = true;
+                Orbwalker.DisableMovement = false;
                 Orbwalker.DisableAttacking = true;
 
                 R.Cast();
