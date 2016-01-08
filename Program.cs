@@ -98,6 +98,17 @@ namespace MadCatz_Katarina
                 return;
             }
 
+            if(!Player.HasBuff("katarinarsound"))
+            {
+                Orbwalker.DisableAttacking = false;
+                Orbwalker.DisableMovement = false;
+            }
+            else
+            {
+                Orbwalker.DisableAttacking = true;
+                Orbwalker.DisableMovement = true;
+            }
+
             switch(Orbwalker.ActiveModesFlags)
             {
                 case Orbwalker.ActiveModes.Combo:
@@ -109,8 +120,15 @@ namespace MadCatz_Katarina
                 case Orbwalker.ActiveModes.LaneClear:
                     LaneClear(LaneClearMenu["Q"].Cast<CheckBox>().CurrentValue, LaneClearMenu["W"].Cast<CheckBox>().CurrentValue);
                     break;
+
+                    
                     
             }
+
+            AutoHarass();
+
+            
+            
         }
 
         static void Combo(bool UseQ, bool UseW, bool UseE, bool UseR)
