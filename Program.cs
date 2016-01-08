@@ -211,10 +211,20 @@ namespace MadCatz_Katarina
             {
                 Q.Cast(_target);
             }
+            else if(Q.IsInRange(_target))
+            {
+                Q.Cast(_target);
+            }
+
             if(W.IsReady() && Misc["Auto W"].Cast<CheckBox>().CurrentValue && _target.IsValidTarget(W.Range))
             {
                 W.Cast();
             }
+            else if(W.IsInRange(_target))
+            {
+                W.Cast();
+            }
+            
         }
     }
 }
