@@ -180,5 +180,10 @@ namespace MadCatz_Katarina
 
             return (float)Damage;
         }
+
+        public double MDmg(Obj_AI_Base _target)
+        {
+            return _target.HasBuff("Katarinaqmark") ? Player.GetSpellDamage(_target, SpellSlot.Q) : 0;
+        }
     }
 }
