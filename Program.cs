@@ -19,7 +19,7 @@ namespace MadCatz_Katarina
         static Spell.Targeted E;
         static Spell.Active R;
 
-        public static Menu menu, ComboMenu, HarassMenu, LaneClearMenu, AutoKillMenu;
+        public static Menu menu, ComboMenu, HarassMenu, LaneClearMenu, Misc;
 
         public static AIHeroClient Player
         {
@@ -72,6 +72,14 @@ namespace MadCatz_Katarina
             LaneClearMenu.Add("W", new CheckBox("Use W", false));
             LaneClearMenu.AddSeparator();
 
+            Misc = menu.AddSubMenu("Misc", "Misc");
+            Misc.AddGroupLabel("Misc");
+            Misc.Add("Q", new CheckBox("KillSteal Q", true));
+            Misc.Add("E", new CheckBox("KillSteal E", true));
+            Misc.Add("AutoKill", new CheckBox("Enable E for Kill(minion ally, Target)", true));
+            Misc.AddSeparator();
+
+
             Game.OnTick += Update;
 
             Chat.Print("MadCatz" + ChampName + "MadCatz_Load");
@@ -123,8 +131,8 @@ namespace MadCatz_Katarina
             if(R.IsReady() && !E.IsReady() && !Q.IsReady() && !W.IsReady() && 
                 _target.IsValidTarget(R.Range))
             {
-                Orbwalker.DisableMovement = true;
-                Orbwalker.DisableAttacking = true;
+                Orbwalker.DisableMovement = false;
+                Orbwalker.DisableAttacking = false;
 
                 R.Cast();
             }
@@ -150,7 +158,27 @@ namespace MadCatz_Katarina
 
         static void AutoKill()
         {
-            var SmartAuto = AutoKillMenu["Auto Enable E hop for Killsteal (to minion, ally, target)"].Cast<CheckBox>().CurrentValue;
+
+        }
+
+        static float ComboDamage(AIHeroClient enemy)
+        {
+            var Damage = 0d;
+
+            if(Q.IsReady())
+            {
+                Damage += Player.GetSpellDamage(enemy, SpellSlot.Q);
+            }
+            if(E.IsReady())
+            {
+                Damage += Player.GetSpellDamage(enemy, SpellSlot.E);
+            }
+            if(R.IsReady() || R.State == SpellState.Surpressed && R.Level > 0)
+            {
+                Damage += Player.GetSpellDamage(enemy, SpellSlot.R) * 8;
+            }
+
+            return (float)Damage;
         }
     }
 }
