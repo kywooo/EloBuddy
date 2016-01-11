@@ -9,6 +9,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Enumerations;
 using SharpDX;
+
 namespace MadCatz_Tristana
 {
     class Program
@@ -24,7 +25,7 @@ namespace MadCatz_Tristana
 
         public static AIHeroClient _target;
 
-        public static AIHeroClient Player
+        public static AIHeroClient _Player
         {
             get
             {
@@ -39,15 +40,19 @@ namespace MadCatz_Tristana
 
         static void OnLoad(EventArgs args)
         {
-            if(Player.ChampionName != ChampName)
+            if(_Player.ChampionName != ChampName)
             {
                 return;
             }
 
-            Q = new Spell.Active(SpellSlot.Q, 600);
-            W = new Spell.Skillshot(SpellSlot.W, 1170, SkillShotType.Circular, 450, int.MaxValue, 180);
-            E = new Spell.Targeted(SpellSlot.E, 600);
-            R = new Spell.Targeted(SpellSlot.R, 600);
+            Bootstrap.Init(null);
+
+            uint level = (uint)Player.Instance.Level;
+
+            Q = new Spell.Active(SpellSlot.Q, 543 + level * 7);
+            W = new Spell.Skillshot(SpellSlot.W, 900, SkillShotType.Circular, 450, int.MaxValue, 180);
+            E = new Spell.Targeted(SpellSlot.E, 543 + level * 7);
+            R = new Spell.Targeted(SpellSlot.R, 543 + level * 7);
 
             menu = MainMenu.AddMenu("MadCatz_Tristana", "MadCatz");
             menu.AddGroupLabel("MadCatz_Tristana");
@@ -81,7 +86,7 @@ namespace MadCatz_Tristana
 
         static void Update(EventArgs args)
         {
-            if(Player.IsDead)
+            if(_Player.IsDead)
             {
                 return;
             }
@@ -120,6 +125,20 @@ namespace MadCatz_Tristana
             if(E.IsReady() && _target != null && _target.IsEnemy && _target.IsValidTarget(E.Range))
             {
                 E.Cast(_target);
+            }
+        }
+
+        static void Killsteal()
+        {
+            var useR = Misc["R"].Cast<CheckBox>().CurrentValue;
+
+            foreach (var Target in HeroManager.Enemies.Where(x => x.IsValidTarget(R.Range) && !x.HasBuffOfType(BuffType.Invulnerability) && !x.IsZombie && x.HasBuffOfType(BuffType.SpellShield)))
+            {
+                if (useR && R.IsReady() && Target.Health + Target.AttackShield < Player.Instance.GetSpellDamage(Target, SpellSlot.R, DamageLibrary.SpellStages.Default))
+                {
+                    R.Cast(Target);
+                    break;
+                }
             }
         }
 

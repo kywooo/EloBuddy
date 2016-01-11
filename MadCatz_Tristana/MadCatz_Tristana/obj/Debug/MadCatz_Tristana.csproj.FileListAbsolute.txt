@@ -1,1 +1,2 @@
 C:\Users\User-Kim\Desktop\MadCatz_Tristana\MadCatz_Tristana\bin\Debug\MadCatz_Tristana.exe.config
+C:\Users\User-Kim\Documents\GitHub\EloBuddy\MadCatz_Tristana\MadCatz_Tristana\bin\Debug\MadCatz_Tristana.exe.config
