@@ -100,6 +100,8 @@ namespace MadCatz_Tristana
                     Harass(HarassMenu["Q"].Cast<CheckBox>().CurrentValue, HarassMenu["E"].Cast<CheckBox>().CurrentValue);
                     break;
             }
+
+            Killsteal();
         }
 
         static void Combo(bool UseQ, bool UseE, bool UseR)
