@@ -58,6 +58,7 @@ namespace MadCatz_Tristana
             ComboMenu.Add("W", new CheckBox("Use W", false));
             ComboMenu.Add("E", new CheckBox("Use E", true));
             ComboMenu.Add("R", new CheckBox("Use R", true));
+            ComboMenu.AddLabel("Self W,R");
             ComboMenu.AddSeparator();
 
             HarassMenu = menu.AddSubMenu("Harass", "Harass");
