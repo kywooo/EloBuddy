@@ -73,6 +73,9 @@ namespace MadCatz_Tristana
             Misc.AddSeparator();
 
             Game.OnTick += Update;
+
+            Chat.Print("MadCatz" + ChampName + "MadCatz_Load");
+            Chat.Print("Korean Developer Good Luck!");
         }
 
         static void Update(EventArgs args)
@@ -85,13 +88,38 @@ namespace MadCatz_Tristana
             switch(Orbwalker.ActiveModesFlags)
             {
                 case Orbwalker.ActiveModes.Combo:
-                    
+                    Combo(ComboMenu["Q"].Cast<CheckBox>().CurrentValue, ComboMenu["E"].Cast<CheckBox>().CurrentValue, ComboMenu["R"].Cast<CheckBox>().CurrentValue);
+                    break;
+                case Orbwalker.ActiveModes.Harass:
+                    Harass(HarassMenu["Q"].Cast<CheckBox>().CurrentValue, HarassMenu["E"].Cast<CheckBox>().CurrentValue);
+                    break;
             }
         }
 
         static void Combo(bool UseQ, bool UseE, bool UseR)
         {
+            if(Q.IsReady() && _target != null && _target.IsEnemy && _target.IsValidTarget(Q.Range))
+            {
+                Q.Cast();
+            }
 
+            if(E.IsReady() && _target != null && _target.IsEnemy && _target.IsValidTarget(E.Range))
+            {
+                E.Cast(_target);
+            }
+
+        }
+
+        static void Harass(bool UseQ, bool UseE)
+        {
+            if(Q.IsReady() && _target != null && _target.IsValidTarget(Q.Range) && _target.IsEnemy)
+            {
+                Q.Cast();
+            }
+            if(E.IsReady() && _target != null && _target.IsEnemy && _target.IsValidTarget(E.Range))
+            {
+                E.Cast(_target);
+            }
         }
 
     }
